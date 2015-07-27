@@ -3,9 +3,11 @@
 # config.sh
 # Author: Kevin Schaich
 # schaich.kevin@gmail.com
+
 # Instructions:
 # To Run, execute:
 # curl -L https://raw.githubusercontent.com/kevinschaich/dotfiles/master/config.sh | sh
+
 echo "Installing Homebrew..."
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
@@ -28,7 +30,6 @@ brew install caskroom/cask/brew-cask
 brew tap caskroom/versions
 brew tap caskroom/fonts
 
-# Install flake8 linter for python
 pip install flake8
 
 echo "Installing applications/utilities/tools..."
@@ -353,17 +354,6 @@ echo "Prevent Time Machine from prompting to use new hard drives as backup volum
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 
 ###############################################################################
-# iTerm 2
-###############################################################################
-
-echo "Setting User Preferences folder"
-defaults write com.googlecode.iterm2 PrefsCustomFolder 1
-defaults write com.googlecode.iterm2 PrefsCustomFolder ~/.iterm2
-
-echo "Don’t display the annoying prompt when quitting iTerm"
-defaults write com.googlecode.iterm2 PromptOnQuit -bool false
-
-###############################################################################
 # Activity Monitor                                                            #
 ###############################################################################
 
@@ -395,6 +385,31 @@ defaults write com.hegenberg.BetterSnapTool recognitionArea 100
 defaults write com.hegenberg.BetterSnapTool showMenubarIcon 0
 
 ###############################################################################
+# Setup symlinks for .dotfiles
+###############################################################################
+
+echo "Setting up symlinks..."
+cd ~ && git clone https://github.com/kevinschaich/dotfiles/ && cd dotfiles
+
+ln -sfF .atom ~
+ln -sfF .bashrc ~
+ln -sfF .bash_profile ~
+ln -sfF .iterm2 ~
+ln -sfF .vimrc ~
+ln -sfF .zshrc ~
+
+###############################################################################
+# iTerm 2
+###############################################################################
+
+echo "Setting User Preferences folder"
+defaults write com.googlecode.iterm2 PrefsCustomFolder 1
+defaults write com.googlecode.iterm2 PrefsCustomFolder ~/.iterm2
+
+echo "Don’t display the annoying prompt when quitting iTerm"
+defaults write com.googlecode.iterm2 PromptOnQuit -bool false
+
+###############################################################################
 # Kill affected applications
 ###############################################################################
 
@@ -409,23 +424,3 @@ for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
   "Transmission"; do
   killall "${app}" > /dev/null 2>&1
 done
-
-###############################################################################
-# Setup symlinks for .dotfiles
-###############################################################################
-
-echo "Opening Dropbox."
-
-open /opt/homebrew-cask/Caskroom/dropbox/latest/Dropbox.app/
-
-echo "Have you setup Dropbox and have a .dotfiles folder?"
-
-read -r response
-
-if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
- curl -L https://gist.githubusercontent.com/kevinschaich/5da766862cf7ba91d3e3/raw/eae813fe2944ecf485a0e686081f53be563b395f/relink.sh | sh
-fi
-
-if ! $CONTINUE; then
- exit
-fi
