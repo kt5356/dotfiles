@@ -10,6 +10,7 @@ Automatigically configure a new Mac in one command, out of the box, with no prer
 Pulled a ton of stuff from my own research, but most of the OSX config comes from these two:
 
 [Mathis Byens's dotfiles](https://github.com/mathiasbynens/dotfiles)
+
 [OSX for Hackers](https://gist.github.com/brandonb927/3195465)
 
 # Installation:
