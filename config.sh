@@ -393,12 +393,12 @@ defaults write com.hegenberg.BetterSnapTool showMenubarIcon 0
 echo "Setting up symlinks..."
 cd ~ && git clone https://github.com/kevinschaich/dotfiles/ && cd dotfiles
 
-ln -sfF .atom ~
-ln -sfF .bashrc ~
-ln -sfF .bash_profile ~
-ln -sfF .iterm2 ~
-ln -sfF .vimrc ~
-ln -sfF .zshrc ~
+ln -sfF ~/dotfiles/.atom ~
+ln -sfF ~/dotfiles/.bashrc ~
+ln -sfF ~/dotfiles/.bash_profile ~
+ln -sfF ~/dotfiles/.iterm2 ~
+ln -sfF ~/dotfiles/.vimrc ~
+ln -sfF ~/dotfiles/.zshrc ~
 
 ###############################################################################
 # iTerm 2
