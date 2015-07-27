@@ -1,6 +1,6 @@
 # dotfiles
 
-My personal OSX configuration, terminal config, utilities, etc.
+My personal configuration for OSX, terminal setup, and dev environment.
 
 # config.sh
 
