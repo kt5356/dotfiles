@@ -5,8 +5,7 @@
 # schaich.kevin@gmail.com
 # Instructions:
 # To Run, execute:
-# curl -L https://gist.githubusercontent.com/kevinschaich/f84aff9f92c7481f8068/raw/1dd7f72406aad410f1952d5101d321ebbb85af1d/config.sh | sh
-
+# curl -L https://raw.githubusercontent.com/kevinschaich/dotfiles/master/config.sh | sh
 echo "Installing Homebrew..."
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
