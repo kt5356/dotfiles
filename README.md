@@ -6,4 +6,4 @@ A configuration script for new machines.
 
 To run, copy and paste into Terminal:
 
-`# curl -L https://raw.githubusercontent.com/kevinschaich/dotfiles/master/config.sh | sh`
+`curl -L https://raw.githubusercontent.com/kevinschaich/dotfiles/master/config.sh | sh`
