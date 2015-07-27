@@ -405,11 +405,11 @@ ln -sfF ~/dotfiles/.zshrc ~
 ###############################################################################
 
 echo "Setting User Preferences folder"
-defaults write com.googlecode.iterm2 PrefsCustomFolder 1
+defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder 1  
 defaults write com.googlecode.iterm2 PrefsCustomFolder ~/.iterm2
 
 echo "Don’t display the annoying prompt when quitting iTerm"
-defaults write com.googlecode.iterm2 PromptOnQuit -bool false
+defaults write com.googlecode.iterm2 PromptOnQuit 0
 
 ###############################################################################
 # Kill affected applications
