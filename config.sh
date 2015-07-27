@@ -32,6 +32,8 @@ brew tap caskroom/fonts
 
 pip install flake8
 
+curl https://install.meteor.com/ | sh
+
 echo "Installing applications/utilities/tools..."
 brew cask install java
 brew cask install iterm2
