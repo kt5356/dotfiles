@@ -340,15 +340,6 @@ echo "Sort contacts by first name"
 defaults write com.apple.AddressBook ABNameSortingFormat sortingFirstName
 
 ###############################################################################
-# Terminal
-###############################################################################
-
-echo "Enabling UTF-8 ONLY in Terminal.app and setting the Pro theme by default"
-defaults write com.apple.terminal StringEncodings -array 4
-#defaults write com.apple.Terminal "Default Window Settings" -string "Pro"
-#defaults write com.apple.Terminal "Startup Window Settings" -string "Pro"
-
-###############################################################################
 # Time Machine
 ###############################################################################
 
@@ -399,17 +390,27 @@ ln -sfF ~/dotfiles/.bash_profile ~
 ln -sfF ~/dotfiles/.iterm2 ~
 ln -sfF ~/dotfiles/.vimrc ~
 ln -sfF ~/dotfiles/.zshrc ~
+sudo cp ~/dotfiles/dark.terminal /Applications/Utilities/Terminal.app/Contents/Resources/Initial\ Settings/
 
 ###############################################################################
 # iTerm 2
 ###############################################################################
 
 echo "Setting User Preferences folder"
-defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder 1  
-defaults write com.googlecode.iterm2 PrefsCustomFolder ~/.iterm2
+defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool TRUE
+defaults write com.googlecode.iterm2 PrefsCustomFolder -string "~/.iterm2"
 
 echo "Don’t display the annoying prompt when quitting iTerm"
-defaults write com.googlecode.iterm2 PromptOnQuit 0
+defaults write com.googlecode.iterm2 PromptOnQuit -bool FALSE
+
+###############################################################################
+# Terminal
+###############################################################################
+
+echo "Enabling UTF-8 ONLY in Terminal.app and setting the dark theme by default"
+defaults write com.apple.terminal StringEncodings -array 4
+defaults write com.apple.Terminal "Default Window Settings" -string "dark"
+defaults write com.apple.Terminal "Startup Window Settings" -string "dark"
 
 ###############################################################################
 # Kill affected applications
