@@ -78,6 +78,11 @@ brew cleanup
 echo "Installing oh-my-zsh..."
 curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
 
+cd ~/.oh-my-zsh/custom/plugins
+git clone git://github.com/zsh-users/zsh-syntax-highlighting.git
+
+cd ~
+
 # Set the colours you can use
 black='\033[0;30m'
 white='\033[0;37m'
@@ -107,6 +112,9 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 ###############################################################################
 # General UI/UX
 ###############################################################################
+
+echo "Use dark mode display"
+sudo defaults write /Library/Preferences/.GlobalPreferences AppleInterfaceTheme Dark
 
 echo "Disable Spotlight indexing for any volume that gets mounted and has not yet been indexed before"
 sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes"
@@ -173,6 +181,12 @@ echo "Speeding up wake from sleep"
 # http://www.cultofmac.com/221392/quick-hack-speeds-up-retina-macbooks-wake-from-sleep-os-x-tips/
 sudo pmset -a standbydelay 86400
 
+echo "Set sleep time to 2 minutes"
+sudo pmset -a displaysleep 2
+
+echo "Sleep hard drives after two hours"
+sudo pmset -a disksleep 120
+
 ################################################################################
 # Trackpad, mouse, keyboard, Bluetooth accessories, and input
 ###############################################################################
@@ -182,6 +196,11 @@ defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool
 defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 
+echo "Enable Three Finger Drag"
+defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -int 1
+defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerHorizSwipeGesture -int 0
+defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerVertSwipeGesture -int 0
+
 echo "Increasing sound quality for Bluetooth headphones/headsets"
 defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40
 
@@ -189,6 +208,7 @@ echo "Disabling press-and-hold for special keys in favor of key repeat"
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 echo "Setting a blazingly fast keyboard repeat rate"
+defaults write NSGlobalDomain InitialKeyRepeat -int 15
 defaults write NSGlobalDomain KeyRepeat -int 0
 
 echo "Setting trackpad & mouse speed to a reasonable number"
@@ -230,6 +250,9 @@ defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 
 echo "Show status bar in Finder by default"
 defaults write com.apple.finder ShowStatusBar -bool true
+
+echo "Show path bar in Finder by default"
+defaults write com.apple.finder ShowPathBar -bool true
 
 echo "Display full POSIX path as Finder window title"
 defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
@@ -376,6 +399,7 @@ defaults write com.hegenberg.BetterSnapTool previewAnimationDuration 0.05
 defaults write com.hegenberg.BetterSnapTool previewBorderWidth 2
 defaults write com.hegenberg.BetterSnapTool recognitionArea 100
 defaults write com.hegenberg.BetterSnapTool showMenubarIcon 0
+$ defaults write com.hegenberg.BetterSnapTool BSTMemorySaver -bool TRUE
 
 ###############################################################################
 # Setup symlinks for .dotfiles
