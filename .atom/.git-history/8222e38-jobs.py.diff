@@ -1,0 +1,126 @@
+diff --git a/portal/resources/api_plugins/jobs.py b/portal/resources/api_plugins/jobs.py
+index 0235131..d08166e 100644
+--- a/portal/resources/api_plugins/jobs.py
++++ b/portal/resources/api_plugins/jobs.py
+@@ -1,97 +1,56 @@
+ """
+ Jobs Plugin
+ """
+ from ..auth import requires_groups
+-from ..views import get_routes #might not need this actually
+-from flask import Blueprint, jsonify, session, request, abort, escape, render_template
++from flask import Blueprint, render_template, jsonify, redirect
++from ..app import app
++# from ..jobs import periodic_query
+ 
+-
+-import requests
+ import resources.models as models
+-import resources.app as app
+-import datetime
+-
++import resources.job_manager as job_manager
+ 
+-def create_job():
+-    entry = models.Jobs('john.doe','example.com', 'example', 'started')
+-    app.db_session.add(entry)
+-    app.db_session.commit()
+ 
+-def get_jobs(query):
+-    """Get jobs from Job DB based on query parameter"""
+-    resultset = []
+-    jobs = list(group for group in query)
+-    for job in jobs:
+-        resultset.append(str(job).split())
+-    return resultset
++jobs = Blueprint('jobs', __name__, url_prefix='/jobs')
+ 
+-iaas = Blueprint('iaas', __name__, url_prefix='/iaas')
+ 
+-@iaas.route('/', methods=['GET', 'POST'])
+-#@requires_groups('all-access', 'All Access')
++@jobs.route('/', methods=['GET', 'POST'])
++@requires_groups('all-access', 'All Access')
+ def show_jobs():
+     """
+     Display all available jobs that the user
+     has access for
+     """
+-    query = models.Jobs.query.all()
+-    final = get_jobs(query)
+-    return render_template('jobs.html', jobs=final)
+-
+-"""Questions about this:
+-Do we do a nested URL such as /<api_name>/<job_id>/status?
+-or just /<job_id> and return a db row?
+-
+-I feel like the first one is better for more modular design.
+-
+-Also can't most of these functions just use the GET method?
+-I don't think we are updating anything to need POST right?
+-Just getting info and displaying it
+-
+-Speaking of access, we should draw a model of who has access
+-to what
+-"""
++    query = models.Job.query.all()
++    return job_manager.get_job_json(query)
+ 
+-@iaas.route('/start')
+-#@requires_groups('all-access', 'All Access')
+-def start_job():
+-    r = requests.get('http://localhost:5000/test/start', params={'uid':'john.doe'})
+-    print r.content
+-    return 'hi'
+ 
+-@iaas.route('/stop')
++@jobs.route('/stop/<int:job_id>', methods=['GET', 'POST'])
+ @requires_groups('all-access', 'All Access')
+ def stop_job(job_id):
+-    pass
++    """
++    This is the page route that is called by the user to stop the job with
++    job_id passed in.
++    """
++    return job_manager.stop_job(job_id)
+ 
+-@iaas.route('/<job_id>', methods=['GET'])
+-#@requires_groups('all-access', 'All Access')
++
++@jobs.route('/id/<int:job_id>', methods=['GET', 'POST'])
++@requires_groups('all-access', 'All Access')
+ def job_info(job_id):
+     """
+     Display info of job with <job_id> if user
+     has access (return db row).
+     """
+-    query = models.Jobs.query.\
+-            filter(models.Jobs.job_id==job_id).all()
+-    jobs = get_jobs(query)
+-    return render_template('jobs.html', jobs=jobs)
++    query = models.Job.query.filter(models.Job.job_id == job_id).all()
++    return job_manager.get_job_json(query)
+ 
+-@iaas.route('/<job_id>/status', methods=['GET'])
+-@requires_groups('all-access', 'All Access')
+-def check_job_status(job_id):
+-    """
+-    Display status of job with <job_id> if
+-    user has access.
+-    """
+-    jobs = get_jobs()
+ 
+-@iaas.route('/<uid>', methods=['GET'])
+-#@requires_groups('all-access', 'All Access')
++@jobs.route('/user/<uid>', methods=['GET', 'POST'])
++@requires_groups('all-access', 'All Access')
+ def uid_jobs(uid):
+     """
+     Display all jobs for corresponding <uid>
+     if user has access.
+     """
+-    query = models.Jobs.query.\
+-            filter(models.Jobs.uid==uid).all()
+-    jobs = get_jobs(query)
++    query = models.Job.query.filter(models.Job.uid == uid).all()
++    return job_manager.get_job_json(query)
