@@ -39,14 +39,10 @@ brew cask install java
 brew cask install iterm2
 brew cask install pandoc
 brew cask install google-chrome
-brew cask install adobe-creative-cloud
 brew cask install caffeine
-brew cask install chromecast
 brew cask install cyberduck
-brew cask install dropbox
 brew cask install mailbox
 brew cask install slack
-brew cask install spotify
 brew cask install atom
 brew cask install utorrent
 brew cask install vlc
@@ -180,12 +176,6 @@ defaults write com.apple.universalaccess reduceTransparency -bool true
 echo "Speeding up wake from sleep"
 # http://www.cultofmac.com/221392/quick-hack-speeds-up-retina-macbooks-wake-from-sleep-os-x-tips/
 sudo pmset -a standbydelay 86400
-
-echo "Set sleep time to 2 minutes"
-sudo pmset -a displaysleep 2
-
-echo "Sleep hard drives after two hours"
-sudo pmset -a disksleep 120
 
 ################################################################################
 # Trackpad, mouse, keyboard, Bluetooth accessories, and input
