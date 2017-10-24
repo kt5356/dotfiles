@@ -39,9 +39,6 @@ alias gp="git push"
 alias cdp="cd ~/inf_portal_api/portal"
 alias cdi="cd ~/inf_iaas_api/iaas"
 alias copy='fc -ln -1 | sed "1s/^[[:space:]]*//" | awk 1 ORS="" | pbcopy '
-alias portal="~/inf_portal_api/portal/cli.py"
-alias serve="python ~/inf_portal_api/portal/main.py"
-alias iaas="python ~/inf_iaas_api/iaas/main.py"
 alias edit="atom ~/inf_portal_api ~/inf_iaas_api"
 alias mkdir="mkdir -p"
 alias mv="mv -iv"
@@ -54,8 +51,6 @@ alias tl="tail"
 alias zshconfig="vim ~/.zshrc"
 alias ohmyzsh="vim ~/.oh-my-zsh"
 alias bashconfig="vim ~/.bash_profile"
-alias subl="/opt/homebrew-cask/Caskroom/sublime-text3/Build\ 3083/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
-alias hook="scp -p -P 29418 kevin.schaich@gerrit.workday.com:hooks/commit-msg .git/hooks/"
 function hide(){
     defaults write com.apple.finder AppleShowAllFiles -bool NO
     killall Finder

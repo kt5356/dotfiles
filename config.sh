@@ -40,11 +40,8 @@ brew cask install iterm2
 brew cask install pandoc
 brew cask install google-chrome
 brew cask install caffeine
-brew cask install cyberduck
-brew cask install mailbox
 brew cask install slack
 brew cask install atom
-brew cask install utorrent
 brew cask install vlc
 brew cask install virtualbox
 brew cask install vagrant
