@@ -1,12 +1,9 @@
 #!/bin/sh
 
-# config.sh
-# Author: Kevin Schaich
-# schaich.kevin@gmail.com
 
 # Instructions:
 # To Run, execute:
-# curl -L https://raw.githubusercontent.com/kevinschaich/dotfiles/master/config.sh | sh
+# curl -L https://raw.githubusercontent.com/kt5356/dotfiles/master/config.sh | sh
 
 echo "Installing Homebrew..."
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -23,28 +20,25 @@ brew install zsh-history-substring-search
 brew install zsh-completions
 brew install zsh-syntax-highlighting
 brew install wget
+brew install tldr
 brew install unrar
 brew install python
+brew install python3
+brew install node
 brew install tree
 brew install caskroom/cask/brew-cask
 brew tap caskroom/versions
-brew tap caskroom/fonts
 
-pip install flake8
-
-curl https://install.meteor.com/ | sh
 
 echo "Installing applications/utilities/tools..."
-brew cask install java
+brew cask install iina
 brew cask install iterm2
-brew cask install pandoc
-brew cask install google-chrome
 brew cask install caffeine
 brew cask install slack
-brew cask install atom
+brew cask install spotify
+brew cask install alfred
+brew cask install visual-studio-code
 brew cask install vlc
-brew cask install virtualbox
-brew cask install vagrant
 brew cask install qlcolorcode
 brew cask install qlstephen
 brew cask install qlmarkdown
@@ -52,6 +46,9 @@ brew cask install quicklook-json
 brew cask install quicklook-csv
 
 echo "Installing Fonts..."
+brew tap caskroom/fonts
+brew cask install font-hack
+brew cask install font-open-sans
 brew cask install font-inconsolata
 brew cask install font-josefin-sans
 brew cask install font-lato
@@ -393,7 +390,7 @@ $ defaults write com.hegenberg.BetterSnapTool BSTMemorySaver -bool TRUE
 ###############################################################################
 
 echo "Setting up symlinks..."
-cd ~ && git clone https://github.com/kevinschaich/dotfiles/ && cd dotfiles
+cd ~ && git clone https://github.com/kt5356/dotfiles/ && cd dotfiles
 
 ln -sfF ~/dotfiles/.atom ~
 ln -sfF ~/dotfiles/.bashrc ~
