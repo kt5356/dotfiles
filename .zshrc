@@ -29,14 +29,18 @@ export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 source $ZSH/oh-my-zsh.sh
 source ~/.bash_profile
 
+export AWS_PROFILE=nextdev
+export AWS_SDK_LOAD_CONFIG=1
+export LC_ALL=en_US.UTF-8
+
+alias o2a="okta2aws"
+alias tf="terraform"
 alias gs="git status"
 alias gd="git diff"
 alias ga="git add -A"
 alias gc="git commit"
 alias gca="git commit --amend"
 alias gp="git push"
-
-alias cdp="cd ~/inf_portal_api/portal"
 alias cdi="cd ~/inf_iaas_api/iaas"
 alias copy='fc -ln -1 | sed "1s/^[[:space:]]*//" | awk 1 ORS="" | pbcopy '
 alias edit="atom ~/inf_portal_api ~/inf_iaas_api"
@@ -89,3 +93,10 @@ export NVM_DIR="$HOME/.nvm"
 export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:$PATH
 [ -d $GOPATH/bin ] && export PATH=$PATH:$GOPATH/bin
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/local/bin/vault vault
+
+# tabtab source for slss package
+# uninstall by removing these lines or running `tabtab uninstall slss`
+[[ -f /Users/kevin.tahmoresi/next/identity/cloud-directory/deployments/serverless/directory/node_modules/tabtab/.completions/slss.zsh ]] && . /Users/kevin.tahmoresi/next/identity/cloud-directory/deployments/serverless/directory/node_modules/tabtab/.completions/slss.zsh
