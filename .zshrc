@@ -1,9 +1,16 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
-ZSH_THEME="steeef"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
@@ -32,6 +39,8 @@ source ~/.bash_profile
 export AWS_PROFILE=nextdev
 export AWS_SDK_LOAD_CONFIG=1
 export LC_ALL=en_US.UTF-8
+export KUBECONFIG=$HOME/.kube/config:$HOME/.kube/config-k3s-home:$HOME/.kube/config-pctest
+
 
 alias o2a="okta2aws"
 alias tf="terraform"
@@ -41,7 +50,6 @@ alias ga="git add -A"
 alias gc="git commit"
 alias gca="git commit --amend"
 alias gp="git push"
-alias cdi="cd ~/inf_iaas_api/iaas"
 alias copy='fc -ln -1 | sed "1s/^[[:space:]]*//" | awk 1 ORS="" | pbcopy '
 alias edit="atom ~/inf_portal_api ~/inf_iaas_api"
 alias mkdir="mkdir -p"
@@ -55,6 +63,8 @@ alias tl="tail"
 alias zshconfig="vim ~/.zshrc"
 alias ohmyzsh="vim ~/.oh-my-zsh"
 alias bashconfig="vim ~/.bash_profile"
+alias gol="/usr/local/bin/goland"
+
 function hide(){
     defaults write com.apple.finder AppleShowAllFiles -bool NO
     killall Finder
@@ -100,3 +110,18 @@ complete -o nospace -C /usr/local/bin/vault vault
 # tabtab source for slss package
 # uninstall by removing these lines or running `tabtab uninstall slss`
 [[ -f /Users/kevin.tahmoresi/next/identity/cloud-directory/deployments/serverless/directory/node_modules/tabtab/.completions/slss.zsh ]] && . /Users/kevin.tahmoresi/next/identity/cloud-directory/deployments/serverless/directory/node_modules/tabtab/.completions/slss.zsh
+export PATH="/usr/local/opt/terraform@0.11/bin:$PATH"
+export PATH="/usr/local/opt/terraform@0.11/bin:$PATH"
+export PATH="/usr/local/opt/awscli@1/bin:$PATH"
+export PATH="/usr/local/opt/awscli/bin:$PATH"
+export PATH="/usr/local/opt/awscli@1/bin:$PATH"
+export PATH="/usr/local/opt/awscli@1/bin:$PATH"
+export PATH="/usr/local/opt/go@1.13/bin:$PATH"
+export PATH="/usr/local/opt/helm@2/bin:$PATH"
+export PATH="/usr/local/sbin:$PATH"
+
+export PATH="$HOME/.jenv/bin:$PATH"
+  eval "$(jenv init -)"
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
